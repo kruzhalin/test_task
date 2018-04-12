@@ -45,6 +45,7 @@
                     var rub =  $('#rub').val();
                     if(!rub || !$.isNumeric(rub)){
                         alert($.mage.__('Please enter correct amount for RUB field.'));
+                        $('#rub').val('');
                         return;
                     }
                     $('.loading').show();
