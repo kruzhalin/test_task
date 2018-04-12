@@ -50,9 +50,11 @@ class Ajax extends \Magento\Framework\App\Action\Action
             try {
                 //send request to API
                 $resultAmount = $this->testHelper->convertCurrency($rub);
+                //Set result amount to result object
                 $result->setData($resultAmount);
                 return $result;
             } catch (\Exception $e) {
+                //Log error
                 $this->logger->error($e->getMessage());
             }
         }

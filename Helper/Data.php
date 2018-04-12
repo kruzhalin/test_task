@@ -8,9 +8,9 @@ namespace Kruzhalin\TestTask\Helper;
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const API_KEY = '';
-
     /**
+     * Convert currencies via free.currencyconverterapi.com
+     *
      * @param        $amount
      * @param string $fromCurrency
      * @param string $toCurrency
@@ -18,11 +18,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     function convertCurrency($amount, $fromCurrency = 'RUB', $toCurrency = 'PLN')
     {
-        $apikey = self::API_KEY;
-
         $fromCurrency = urlencode($fromCurrency);
         $toCurrency   = urlencode($toCurrency);
-        $query         = "{$fromCurrency}_{$toCurrency}";
+        $query        = "{$fromCurrency}_{$toCurrency}";
 
         $json = file_get_contents("https://free.currencyconverterapi.com/api/v5/convert?q={$query}&compact=ultra");
         $obj  = json_decode($json, true);
