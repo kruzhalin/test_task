@@ -2,32 +2,64 @@
 
 namespace Kruzhalin\TestTask\Helper;
 
+use Magento\Store\Model\ScopeInterface;
+
 /**
  * Class Data
  * @package Kruzhalin\TestTask\Helper
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+
+    const TESTTASK_MULTIPLE_ENABLE_XML_PATH = 'kruzhalin_test_task/general/enable';
+    const TESTTASK_MULTIPLE_FACTOR_XML_PATH = 'kruzhalin_test_task/general/decimal_factor';
     /**
-     * Convert currencies via free.currencyconverterapi.com
-     *
-     * @param        $amount
-     * @param string $fromCurrency
-     * @param string $toCurrency
-     * @return string
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
-    function convertCurrency($amount, $fromCurrency = 'RUB', $toCurrency = 'PLN')
+    protected $storeManager;
+
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfigInterface;
+
+    /**
+     * Data constructor.
+     * @param \Magento\Framework\App\Helper\Context      $context
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    public function __construct(
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
+        $this->storeManager         = $storeManager;
+        $this->scopeConfigInterface = $context->getScopeConfig();
+        parent::__construct($context);
+    }
+
+    /**
+     * @param null $scopeCode
+     * @return mixed
+     */
+    public function getEnabled($scopeCode = null)
     {
-        $fromCurrency = urlencode($fromCurrency);
-        $toCurrency   = urlencode($toCurrency);
-        $query        = "{$fromCurrency}_{$toCurrency}";
+        return $this->scopeConfigInterface->getValue(
+            self::TESTTASK_MULTIPLE_ENABLE_XML_PATH,
+            ScopeInterface::SCOPE_STORE,
+            $scopeCode
+        );
+    }
 
-        $json = file_get_contents("https://free.currencyconverterapi.com/api/v5/convert?q={$query}&compact=ultra");
-        $obj  = json_decode($json, true);
-
-        $val = floatval($obj["$query"]);
-
-        $total = $val * $amount;
-        return number_format($total, 2, '.', '');
+    /**
+     * @param null $scopeCode
+     * @return mixed
+     */
+    public function getFactor($scopeCode = null)
+    {
+        return $this->scopeConfigInterface->getValue(
+            self::TESTTASK_MULTIPLE_FACTOR_XML_PATH,
+            ScopeInterface::SCOPE_STORE,
+            $scopeCode
+        );
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kruzhalin_TestTask::log_listing"
+             title="Kruzhalin Log Listing"
+             module="Kruzhalin_TestTask"
+             sortOrder="500"
+             resource="Kruzhalin_TestTask::log_listing"
+             parent="Magento_Backend::system_tools"
+             action="kruzhalin_testtask/log/index"
+        />
+    </menu>
+</config>

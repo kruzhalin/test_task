@@ -1,14 +1,14 @@
 # TestTask
-ORBA PHP Test Task
+PHP Test Task
 
 
 #Installation
 
 Run commands below
 ```
-composer config repositories.kruzhalin-magento-2-currency-converter git git@github.com:kruzhalin/currency-converter.git
+composer config repositories.kruzhalin-magento-2-test_task git git@github.com:kruzhalin/test_task.git
 ```
 
 ```
-composer require kruzhalin/currency-converter:dev-master
+composer require kruzhalin/test_task:dev-master
 ```

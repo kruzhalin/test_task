@@ -1,6 +1,6 @@
 {
-    "name": "kruzhalin/currency-converter",
-    "description": "Kruzhalin ORBA Test Task",
+    "name": "kruzhalin/test_task",
+    "description": "Kruzhalin Test Task",
     "type": "magento2-module",
     "version": "1.0.0",
     "license": [
